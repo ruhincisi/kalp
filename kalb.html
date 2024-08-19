@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalplerle Dolu</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #ffdde1;
+        }
+
+        .heart {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: float 10s linear infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: inherit;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -30px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 30px;
+            top: 0;
+        }
+
+        .text {
+            position: absolute;
+            font-size: 16px;
+            color: #ff69b4; /* Renk değiştirilmiş yazılar için */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            animation: float 10s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+
+            // Farklı renklerde kalpler oluştur
+            const colors = ["red", "pink", "orange", "purple", "blue"];
+            heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.top = Math.random() * 100 + "vh";
+            heart.style.animationDuration = Math.random() * 5 + 5 + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 10000);
+        }
+
+        function createText() {
+            const text = document.createElement('div');
+            text.classList.add('text');
+            
+            // Romantik hitaplar
+            const messages = ["<3", "Prenses", "Güzelim", "Minnos", "Canım", "Seni Seviyorum"];
+            text.innerText = messages[Math.floor(Math.random() * messages.length)];
+
+            text.style.left = Math.random() * 100 + "vw";
+            text.style.top = Math.random() * 100 + "vh";
+            text.style.animationDuration = Math.random() * 5 + 5 + "s";
+
+            document.body.appendChild(text);
+
+            setTimeout(() => {
+                text.remove();
+            }, 10000);
+        }
+
+        // Kalp ve metin oluşturmak için interval ayarları
+        setInterval(createHeart, 50); // 0.05 saniyede bir kalp oluştur
+        setInterval(createText, 1000); // Her 1 saniyede bir metin oluştur
+    </script>
+</body>
+</html>
